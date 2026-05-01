@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <title>Pokédex ASIR</title>
+    <link rel="stylesheet" href="estilos.css">
+</head>
+<body>
+    <header>
+        <h1>Pokédex Pro</h1>
+        <div class="filters">
+            <input type="text" id="buscNombre" placeholder="Buscar por nombre...">
+            <select id="selTipo">
+                <option value="">Todos los tipos</option>
+                <option value="Fire">Fuego</option>
+                <option value="Water">Agua</option>
+                <option value="Grass">Planta</option>
+                <option value="Electric">Eléctrico</option>
+                <option value="Ice">Hielo</option>
+                <option value="Poison">Veneno</option>
+                <option value="Flying">Volador</option>
+            </select>
+            <select id="selGen">
+                <option value="">Todas las Gens</option>
+                <option value="1">Gen 1</option>
+                <option value="2">Gen 2</option>
+            </select>
+            <select id="selLeg">
+                <option value="">Legendarios?</option>
+                <option value="1">Sí</option>
+                <option value="0">No</option>
+            </select>
+            <button id="btnBuscar">Buscar</button>
+            <button id="btnDescargar">Descargar JSON</button>
+        </div>
+    </header>
+
+    <main id="resultado">
+        </main>
+
+    <script src="script.js"></script>
+</body>
+</html>

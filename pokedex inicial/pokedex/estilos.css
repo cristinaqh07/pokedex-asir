@@ -1,0 +1,12 @@
+body { font-family: sans-serif; background: #f0f0f0; }
+.filters { display: flex; gap: 10px; flex-wrap: wrap; padding: 20px; background: #e00; color: white; }
+#resultado { display: grid; grid-template-columns: repeat(auto-fill, minmax(200px, 1fr)); gap: 20px; padding: 20px; }
+.card { background: white; border-radius: 10px; padding: 15px; text-align: center; box-shadow: 0 4px 8px rgba(0,0,0,0.1); transition: transform 0.2s; }
+.card:hover { transform: scale(1.05); }
+
+.type-fire { border-bottom: 5px solid #F08030; }
+.type-water { border-bottom: 5px solid #6890F0; }
+.type-grass { border-bottom: 5px solid #78C850; }
+
+.legendary { background: #fff4d1; border: 2px solid #ffd700; box-shadow: 0 0 15px #ffd700; }
+.badge { background: gold; padding: 2px 5px; border-radius: 5px; font-size: 0.8em; font-weight: bold; }
