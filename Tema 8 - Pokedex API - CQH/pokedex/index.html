@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <title>Pokédex ASIR</title>
+    <link rel="stylesheet" href="estilos.css">
+</head>
+<body>
+    <header>
+        <h1>Pokédex Pro</h1>
+        <div class="filters">
+            <input type="text" id="buscNombre" placeholder="Buscar por nombre...">
+            <select id="selTipo">
+                <option value="">Todos los tipos</option>
+                <option value="Fire">Fuego</option>
+                <option value="Water">Agua</option>
+                <option value="Grass">Planta</option>
+                <option value="Electric">Eléctrico</option>
+                <option value="Ice">Hielo</option>
+                <option value="Poison">Veneno</option>
+                <option value="Flying">Volador</option>
+            </select>
+            <select id="selGen">
+                <option value="">Todas las Gens</option>
+                <option value="1">Gen 1</option>
+                <option value="2">Gen 2</option>
+            </select>
+            <select id="selLeg">
+                <option value="">Legendarios?</option>
+                <option value="1">Sí</option>
+                <option value="0">No</option>
+            </select>
+            <button id="btnBuscar">Buscar</button>
+            <button id="btnDescargar">Descargar JSON</button>
+            <button id="btnToggleModo" class="btn-special">🌓 Modo</button>
+        </div>
+    </header>
+
+    <section id="seccionAlta">
+        <h3>Añadir Nuevo Pokémon</h3>
+        <form id="formAlta">
+            <input type="text" id="addNombre" placeholder="Nombre" required>
+            <input type="text" id="addTipo" placeholder="Tipo Principal" required>
+            <input type="number" id="addGen" placeholder="Generación" required>
+            <button type="submit">Guardar Pokémon</button>
+        </form>
+    </section>
+
+    <main id="resultado"></main>
+
+    <div id="miModal" class="modal">
+        <div class="modal-content">
+            <span id="cerrarModal">&times;</span>
+            <div id="detallePokemon"></div>
+        </div>
+    </div>
+
+    <script src="script.js"></script>
+</body>
+</html>
