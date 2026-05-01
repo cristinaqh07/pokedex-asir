@@ -1,0 +1,235 @@
+body { font-family: sans-serif; background: #f0f0f0; }
+.filters { display: flex; gap: 10px; flex-wrap: wrap; padding: 20px; background: #e00; color: white; }
+#resultado { display: grid; grid-template-columns: repeat(auto-fill, minmax(200px, 1fr)); gap: 20px; padding: 20px; }
+.card { background: white; border-radius: 10px; padding: 15px; text-align: center; box-shadow: 0 4px 8px rgba(0,0,0,0.1); transition: transform 0.2s; }
+.card:hover { transform: scale(1.05); }
+
+.type-fire { border-bottom: 5px solid #F08030; }
+.type-water { border-bottom: 5px solid #6890F0; }
+.type-grass { border-bottom: 5px solid #78C850; }
+
+.legendary { background: #fff4d1; border: 2px solid #ffd700; box-shadow: 0 0 15px #ffd700; }
+.badge { background: gold; padding: 2px 5px; border-radius: 5px; font-size: 0.8em; font-weight: bold; }
+
+/* Colores dinámicos por tipo principal */
+.type-grass { background-color: #defde0; border: 2px solid #78c850; }
+.type-fire { background-color: #fddfdf; border: 2px solid #f08030; }
+.type-water { background-color: #def3fd; border: 2px solid #6890f0; }
+.type-electric { background-color: #fcf7de; border: 2px solid #f8d030; }
+.type-poison { background-color: #f5edfd; border: 2px solid #a040a0; }
+.type-ice { background-color: #e0f5ff; border: 2px solid #98d8d8; }
+.type-flying { background-color: #f5f5f5; border: 2px solid #a890f0; }
+
+/* Efecto para Legendarios (Punto 5.2) */
+.legendary {
+    box-shadow: 0 0 20px #ffd700;
+    border: 3px dashed #ffd700 !important;
+    transform: scale(1.02);
+}
+
+.badge {
+    background: #ffd700;
+    color: #000;
+    padding: 5px;
+    font-size: 0.7em;
+    font-weight: bold;
+    border-radius: 4px;
+    display: inline-block;
+    margin-top: 5px;
+}
+
+.card.type-fire { border-left: 10px solid #ff4422; background-color: #ffeb3b21; }
+.card.type-water { border-left: 10px solid #3399ff; background-color: #03a9f412; }
+.card.type-grass { border-left: 10px solid #77cc55; background-color: #4caf5014; }
+/* Añade los tipos que quieras: electric, psychic, poison... */
+
+/* --- MEJORA DE LEGENDARIOS DINÁMICOS --- */
+
+/* Mantenemos la estructura base del legendario pero quitamos el color fijo */
+.card.legendary {
+    border-width: 3px !important;
+    border-style: dashed !important; /* Mantiene el borde punteado/discontinuo */
+    transform: scale(1.02);
+    background: linear-gradient(135deg, rgba(255, 255, 255, 1) 0%, rgba(255, 255, 255, 0.8) 100%);
+}
+
+/* Ahora vinculamos el color del borde y la sombra al tipo, SOLO si es legendario */
+.card.legendary.type-grass { border-color: #78C850 !important; box-shadow: 0 0 15px rgba(120, 200, 80, 0.6); }
+.card.legendary.type-fire { border-color: #F08030 !important; box-shadow: 0 0 15px rgba(240, 128, 48, 0.6); }
+.card.legendary.type-water { border-color: #6890F0 !important; box-shadow: 0 0 15px rgba(104, 144, 240, 0.6); }
+.card.legendary.type-electric { border-color: #F8D030 !important; box-shadow: 0 0 15px rgba(248, 208, 48, 0.6); }
+.card.legendary.type-ice { border-color: #98D8D8 !important; box-shadow: 0 0 15px rgba(152, 216, 216, 0.6); }
+.card.legendary.type-psychic { border-color: #F85888 !important; box-shadow: 0 0 15px rgba(248, 88, 136, 0.6); }
+
+/* Ajuste para el badge "LEGENDARIO" para que combine con el diseño */
+.legendary .badge {
+    background: #313131;
+    color: #fff;
+    border: 1px solid rgba(255,255,255,0.3);
+}
+
+/* Animación de pulsación suave para legendarios (opcional pero queda genial) */
+.card.legendary {
+    animation: pulseLegendary 2s infinite alternate ease-in-out;
+}
+
+@keyframes pulseLegendary {
+    from { filter: brightness(1); }
+    to { filter: brightness(1.05); }
+}
+
+#resultado {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+    gap: 20px;
+    padding: 20px;
+}
+
+.card:hover {
+    transform: translateY(-5px);
+    transition: all 0.3s ease;
+    cursor: pointer;
+}
+
+/* Modo Oscuro */
+body.dark-mode { background-color: #222; color: white; }
+body.dark-mode .card { background-color: #333; color: white; border-color: #444; }
+
+/* Animación de entrada (5.2) */
+.card { animation: slideIn 0.4s ease-out; transition: transform 0.2s; }
+.card:hover { transform: scale(1.05); cursor: pointer; }
+
+@keyframes slideIn {
+    from { opacity: 0; transform: translateY(20px); }
+    to { opacity: 1; transform: translateY(0); }
+}
+
+/* Modal (Mejora opcional) */
+.modal { display: none; position: fixed; top: 0; left: 0; width: 100%; height: 100%; background: rgba(0,0,0,0.7); }
+.modal-content { background: white; color: black; width: 350px; margin: 10% auto; padding: 20px; border-radius: 15px; text-align: center; position: relative; }
+#cerrarModal { position: absolute; right: 15px; top: 10px; font-size: 24px; cursor: pointer; }
+
+/* Contenedor de filtros con Flexbox para empujar el botón a la derecha */
+.filters {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    padding: 15px 25px;
+    background: linear-gradient(180deg, #e3350d 0%, #c00d0d 100%); /* Rojo Pokémon degradado */
+    box-shadow: 0 4px 10px rgba(0,0,0,0.3);
+    border-bottom: 4px solid #313131;
+}
+
+/* Empujar el botón de Modo a la derecha del todo */
+#btnToggleModo {
+    margin-left: auto; 
+}
+
+/* Diseño Profesional para todos los botones */
+button {
+    padding: 8px 18px;
+    border-radius: 20px; /* Bordes redondeados más elegantes */
+    border: 2px solid #313131;
+    background-color: #f0f0f0;
+    color: #313131;
+    font-weight: bold;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    text-transform: uppercase;
+    font-size: 0.85em;
+    box-shadow: 2px 2px 0px #313131;
+}
+
+button:hover {
+    background-color: #313131;
+    color: white;
+    transform: translateY(-2px);
+    box-shadow: 4px 4px 0px #111;
+}
+
+button:active {
+    transform: translateY(0);
+    box-shadow: 1px 1px 0px #111;
+}
+
+/* Estilo especial para botones de acción (Buscar y Descargar) */
+#btnBuscar, #btnDescargar {
+    background-color: #ffcb05; /* Amarillo Pokémon */
+    color: #2a75bb; /* Azul Pokémon */
+    border-color: #2a75bb;
+}
+
+#btnBuscar:hover, #btnDescargar:hover {
+    background-color: #2a75bb;
+    color: #ffcb05;
+}
+
+/* Estilo para el botón de Modo Oscuro */
+#btnToggleModo {
+    background-color: #313131;
+    color: white;
+    border-color: #f0f0f0;
+}
+
+/* Inputs y Selects más limpios */
+input[type="text"], select {
+    padding: 8px;
+    border-radius: 8px;
+    border: 2px solid #313131;
+    outline: none;
+}
+
+/* Animación suave para la aparición del Modal */
+.modal {
+    display: none;
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: rgba(0,0,0,0.7);
+    backdrop-filter: blur(4px); /* Difumina el fondo para mayor elegancia */
+    z-index: 1000;
+}
+
+.modal-content {
+    background: white;
+    width: 350px;
+    margin: 10% auto;
+    padding: 30px;
+    border-radius: 20px;
+    text-align: center;
+    position: relative;
+    border: 8px solid #313131; /* Borde base */
+    transition: all 0.3s ease; /* Transición suave de colores */
+    animation: modalPop 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275); /* Efecto rebote suave */
+}
+
+@keyframes modalPop {
+    from { opacity: 0; transform: scale(0.8); }
+    to { opacity: 1; transform: scale(1); }
+}
+
+/* Bordes dinámicos por tipo en el Modal */
+.modal-type-grass { border-color: #78C850; box-shadow: 0 0 20px rgba(120, 200, 80, 0.5); }
+.modal-type-fire { border-color: #F08030; box-shadow: 0 0 20px rgba(240, 128, 48, 0.5); }
+.modal-type-water { border-color: #6890F0; box-shadow: 0 0 20px rgba(104, 144, 240, 0.5); }
+.modal-type-electric { border-color: #F8D030; box-shadow: 0 0 20px rgba(248, 208, 48, 0.5); }
+.modal-type-poison { border-color: #A040A0; box-shadow: 0 0 20px rgba(160, 64, 160, 0.5); }
+.modal-type-psychic { border-color: #F85888; box-shadow: 0 0 20px rgba(248, 88, 136, 0.5); }
+
+/* Mejora estética de la imagen dentro del modal */
+.img-detalle {
+    filter: drop-shadow(5px 5px 5px rgba(0,0,0,0.2));
+    transition: transform 0.3s;
+}
+.img-detalle:hover {
+    transform: scale(1.1);
+}
+
+.habilidad-txt {
+    background: #f0f0f0;
+    padding: 3px 10px;
+    border-radius: 10px;
+    text-transform: capitalize;
+}
